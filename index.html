@@ -1,0 +1,726 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <meta charset='utf-8' />
+    <meta content='width=1024, user-scalable=no' name='viewport' />
+    <!-- deck.js's core css -->
+    <link href="deck.js/core/deck.core.css" rel="stylesheet" type="text/css"/>
+    <!-- deck.js extension CSS files -->
+    <link href="deck.js/extensions/codemirror/deck.codemirror.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/goto/deck.goto.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/hash/deck.hash.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/menu/deck.menu.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/navigation/deck.navigation.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/scale/deck.scale.css" rel="stylesheet" type="text/css"/>
+    <link href="deck.js/extensions/status/deck.status.css" rel="stylesheet" type="text/css"/>
+    <!-- all css in the css dir: Keydown CSS, your custom CSS, and themes from deck.js -->
+    <link href="css/keydown.css" rel="stylesheet" type="text/css"/>
+    <link href="css/corso_android.css" rel="stylesheet" type="text/css"/>
+    <link href="css/default.css" rel="stylesheet" type="text/css"/>
+    <link href="css/horizontal-slide.css" rel="stylesheet" type="text/css"/>
+    <link href="css/swiss.css" rel="stylesheet" type="text/css"/>
+    <!-- Modernizr (provided for legacy browsers) -->
+    <script src="deck.js/support/modernizr.custom.js" type="text/javascript"></script>
+  </head>
+  <body class='deck-container keydown'>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Android Workshop</h1>
+        
+        <h2>Torino, Gennaio 2013</h2>
+        
+        <h3>Michelangelo Altamore</h3>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Installazione software</h1>
+        
+        <ol>
+        <li><a href="https://developer.android.com/sdk/index.html">Installare Android SDK</a></li>
+        <li><a href="https://www.eclipse.org/downloads/packages/eclipse-mobile-developers/junosr1">Installare Eclipse IDE</a></li>
+        <li><a href="https://developer.android.com/sdk/installing/installing-adt.html">Installare Android Developer Tools</a></li>
+        <li><a href="https://github.com/commonsguy/cw-lunchlist/archive/master.zip">Esempi Android da scaricare</a></li>
+        </ol>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Links da consultare</h1>
+        
+        <ul>
+        <li><a href="https://developer.android.com/reference/packages.html">Android Package Reference</a></li>
+        <li><a href="https://developer.android.com/guide/components/index.html">Official API Guides</a></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Overview dell'OS</h1>
+        
+        <ul>
+        <li>Android e' basato su un kernel Linux</li>
+        <li>middleware, librerie e le API sono scritte in C</li>
+        <li>le applicazioni girano su un framework applicativo che include librerie compatibili con Java basate su Apache Harmony.</li>
+        <li>Android usa la Dalvik Virtual Machine con una compilazione JIT per eseguire Dalvik <em>dex-code</em>, che viene generalmente tradotto dal byte-code Java.</li>
+        <li>La principale piattaforma hardware e' l'architettura ARM.</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Architettura di Android</h1>
+        
+        <p><img src="images/android_os_architecture.png" alt="Architettura di Android OS" /></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Applicazioni Android</h1>
+        
+        <ul>
+        <li>sono scritte nel linguaggio di programmazione Java</li>
+        <li>gli SDK Android consentono di compilare il codice, insieme a tutti i dati e le risorse in un pacchetto Android, un file di archivio con un suffisso <code>.apk</code> avente tutto il codice in un unico file</li>
+        <li>un Apk è considerato una sola applicazione ed e' il file che i dispositivi Android utilizzano per installare l'applicazione</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Sicurezza</h1>
+        
+        <p>Una volta installata su un dispositivo, ogni applicazione Android vive nella propria sandbox di sicurezza:</p>
+        
+        <ul>
+        <li>il sistema operativo Android è un sistema multi-utente Linux in cui ogni applicazione è un utente diverso</li>
+        <li>per impostazione predefinita, il sistema assegna ad ogni applicazione un unico ID utente Linux (l'ID è utilizzato solo dal sistema e non è noto all'utente)</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Sicurezza (2)</h1>
+        
+        <ul>
+        <li><p>il sistema imposta le autorizzazioni per tutti i file di un'applicazione in modo che solo l'ID utente assegnato a tale applicazione possa accedervi.</p></li>
+        <li><p>ogni processo ha la propria macchina virtuale (VM), per cui il codice dell'applicazione viene eseguito in isolamento da altre applicazioni.</p></li>
+        <li><p>per default ogni applicazione viene eseguita in un proprio processo Linux.</p></li>
+        <li><p>Android inizia il processo quando uno dei componenti dell'applicazione deve essere eseguito, spegne il processo quando non è più necessario o quando il sistema deve recuperare la memoria per altre applicazioni.</p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Condivisione Dati</h1>
+        
+        <p>per condividere i dati con altre applicazioni e per accedere a servizi di sistema:</p>
+        
+        <ul>
+        <li><p>due applicazioni possono condividere lo stesso ID utente di Linux, nel qual caso esse sono in grado di accedere ai file degli altri. Per risparmiare risorse di sistema, le applicazioni con lo stesso ID utente possono anche girare nello stesso processo Linux e condividere la stessa VM (le applicazioni devono essere firmate con lo stesso certificato).</p></li>
+        <li><p>un'applicazione può richiedere il permesso di accedere ai dati del dispositivo come ad esempio i contatti dell'utente, messaggi SMS, la memoria di massa (SD card), fotocamera, Bluetooth, e altro ancora.</p></li>
+        </ul>
+        
+        
+        <p>le autorizzazioni di applicazione devono essere concesse dall'utente al momento dell'installazione.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Componenti Applicativi</h1>
+        
+        <ul>
+        <li>sono le componenti essenziali di un'applicazione Android.</li>
+        <li>ogni componente è un punto diverso attraverso cui il sistema può entrare nell'applicazione.</li>
+        <li>non tutti i componenti sono punti di ingresso reali per l'utente e alcuni dipendono l'uno dall'altro, ma ognuno esiste come entità e svolge un ruolo specifico</li>
+        <li>ogni componente è un elemento unico che serve a definire il comportamento generale dell'applicazione.</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Componenti Applicativi</h1>
+        
+        <p>Ci sono quattro diversi tipi di componenti. Ogni tipo ha uno scopo distinto ed ha un ciclo di vita diverso che definisce come il componente viene creato e distrutto.</p>
+        
+        <ol>
+        <li>Activity</li>
+        <li>Service</li>
+        <li>Content Provider</li>
+        <li>Broadcast Receiver</li>
+        </ol>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Activity</h1>
+        
+        <ul>
+        <li>rappresenta una singola schermata con un'interfaccia utente</li>
+        <li>e' una singola cosa che l'utente puo' fare</li>
+        <li>interagisce con l'utente</li>
+        <li>presenta all'utente una finestra nella quale posizionare gli elementi della UI</li>
+        </ul>
+        
+        
+        <p>Esempio: un'applicazione di posta elettronica potrebbe avere una attività che mostra un elenco di nuove email, un'altra attività per comporre una e-mail, e un'altra attività di lettura delle email. Sebbene le attività lavorano insieme per formare un'esperienza utente coerente nell'applicazione di posta elettronica, ognuna è indipendente dalle altre. In questo modo, una diversa applicazione può attivare una qualsiasi di queste attività (se permesso dal programma di posta elettronica).</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Service</h1>
+        
+        <ul>
+        <li><p>e' un componente che viene eseguito in background per eseguire operazioni di lunga durata o svolgere attività per processi remoti.</p></li>
+        <li><p>non fornisce un'interfaccia utente.</p></li>
+        </ul>
+        
+        
+        <p>Esempio: un servizio può riprodurre musica in background mentre l'utente è in un'altra applicazione, oppure potrebbe recuperare i dati attraverso la rete senza bloccare l'interazione dell'utente con una determinata attività.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Content Provider</h1>
+        
+        <ul>
+        <li>gestisce un insieme condiviso di dati delle applicazioni</li>
+        <li>puo' memorizzare dati nel file system, un database SQLite, sul web, o qualsiasi altro luogo di memorizzazione persistente l'applicazione può accedere</li>
+        <li>tramite esso altre applicazioni possono interrogare o anche modificare i dati</li>
+        </ul>
+        
+        
+        <p>Esempio: Android fornisce un Content Provider che gestisce le informazioni di contatto dell'utente. Come tale, tutte le applicazioni con le autorizzazioni appropriate possono interrogare parte del Content Provider (come ad esempio ContactsContract.Data) per leggere e scrivere informazioni su una persona particolare.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Broadcast Receiver</h1>
+        
+        <ul>
+        <li><p>e' un componente che risponde ad annunci broadcast a livello di sistema</p></li>
+        <li><p>molti annunci provengono dal sistema operativo, ad esempio, un evento che annuncia che lo schermo è spento, la batteria è scarica, o una foto è stata catturata.</p></li>
+        <li><p>ma anche le applicazioni possono anche avviare tramissione di annunci ad esempio, per consentire altre applicazioni sapere che alcuni dati sono stati scaricati nel dispositivo e sono disponibili per l'uso</p></li>
+        </ul>
+        
+        
+        <p>Anche se non visualizzano un'interfaccia utente, possono creare una notifica sulla barra di stato per avvisare l'utente</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Attivazione Componenti</h1>
+        
+        <p>Un aspetto unico di Android è che qualsiasi applicazione può aprire un componente di un'altra.</p>
+        
+        <p>Esempio: in un'applicazione si desidera che l'utente scatti una foto con la fotocamera del dispositivo.</p>
+        
+        <ul>
+        <li>Probabilmente c'e' gia' un'altra applicazione che lo fa</li>
+        <li>L'applicazione la può quindi usare, piuttosto di sviluppare un'activity specifica</li>
+        </ul>
+        
+        
+        <p>Non c'e' bisogno di integrare o collegare il codice dell'applicazione della fotocamera. Al contrario, si può semplicemente avviare l'attività nell'applicazione della fotocamera che cattura una foto. Al termine, la foto è anche restituita alla propria applicazione in modo da essere utilizzata. All'utente appare che la sezione di scatto fotografia della fotocamera sia in realtà parte integrante dell'applicazione.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Attivazione Componenti</h1>
+        
+        <p>Quando nel sistema si avvia un componente, inizia il processo per l'applicazione (se non è già in esecuzione) e si istanziano le classi necessarie per il componente.</p>
+        
+        <p>Poiché il sistema esegue ogni applicazione in un processo separato con i permessi dei file che limitano l'accesso ad altre applicazioni, l'applicazione non può direttamente attivare un componente da un'altra applicazione.</p>
+        
+        <p>Il sistema Android, tuttavia, può, quindi, per attivare un componente in un'altra applicazione, basta consegnare un messaggio al sistema che indica l'<em>Intent</em> di avviare un particolare componente.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Intents</h1>
+        
+        <ul>
+        <li><p>sono messaggi asincroni che consentono ad Android di richiedere funzionalita' da altri
+        componenti del sistema Android.</p></li>
+        <li><p>Esempio: un'Activity puo' inviare un'Intent ad Android al fine di fare partire un'altra Activity</p></li>
+        <li><p>Quindi gli Intent consentono di combinare componenti debolmente accoppiati per eseguire certe operazioni.</p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Intents</h1>
+        
+        <ul>
+        <li><p>possono essere usati per segnalare al sistema Android che e' occorso un certo evento</p></li>
+        <li><p>altri componenti in Android possono registrare quell'evento ed essere notificati</p></li>
+        <li><p>gli Intent sono istanze della classe <code>android.content.Intent</code></p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Intents</h1>
+        
+        <ul>
+        <li>possono contenere dati, questi dati possono essere usati dal componente che riceve l'Intent</li>
+        </ul>
+        
+        
+        <p>Esempio: un'applicazione chiama il componente browser tramite un'intent, l'Intent puo' contenere come dati l'URL con cui si vuole che si apra il componente.</p>
+        
+        <ul>
+        <li>Android supporta Intent espliciti ed impliciti</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Esercitazione 1</h1>
+        
+        <ol>
+        <li>creare un emulatore su android</li>
+        <li>creare un nuovo progetto android da Eclipse</li>
+        <li>deployare il progetto sull'emulatore</li>
+        </ol>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Struttura Applicazioni</h1>
+        
+        <p>In un progetto Android e' presente un <em>Manifest</em></p>
+        
+        <ul>
+        <li>che elenca i componenti disponibili nell'applicazione</li>
+        <li>un componente principale, l'<em>entry point</em> dell'applicazione</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Manifest Android</h1>
+        
+        <p><code>AndroidManifest.xml</code>
+        <textarea class='code' display='none' mode='xml'><?xml version="1.0" encoding="utf-8"?>&#x000A;<manifest xmlns:android="http://schemas.android.com/apk/res/android"&#x000A;package="com.example.exampleandroid"&#x000A;android:versionCode="1"&#x000A;android:versionName="1.0" >&#x000A;&#x000A;	<uses-sdk&#x000A;	android:minSdkVersion="8"&#x000A;	android:targetSdkVersion="16" />&#x000A;&#x000A;	<application&#x000A;	android:allowBackup="true"&#x000A;	android:icon="@drawable/ic_launcher"&#x000A;	android:label="@string/app_name"&#x000A;	android:theme="@style/AppTheme" >&#x000A;		<activity&#x000A;		android:name="com.example.exampleandroid.MainActivity"&#x000A;		android:label="@string/app_name" >&#x000A;			<intent-filter>&#x000A;				<action android:name="android.intent.action.MAIN" />&#x000A;				<category android:name="android.intent.category.LAUNCHER" />&#x000A;			</intent-filter>&#x000A;		</activity>&#x000A;	</application>&#x000A;</manifest></textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Directories di Progetto</h1>
+        
+        <pre><code>MyAndroidProject
+        |-bin
+        |-gen
+        |-assets
+        |-res
+        |---drawable-hdpi
+        |---drawable-ldpi
+        |---drawable-mdpi
+        |---drawable-xhdpi
+        |---layout
+        |---values
+        \-src
+        </code></pre>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Activity</h1>
+        
+        <ul>
+        <li>rappresenta una singola schermata con una interfaccia utente</li>
+        <li>e' una singola cosa che l'utente puo' fare</li>
+        <li>interagisce con l'utente</li>
+        <li>presenta all'utente una finestra nella quale posizionare gli elementi della UI</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <p><a href="https://developer.android.com/images/activity_lifecycle.png">Ciclo di vita di un'activity</a></p>
+        
+        <p><img src="images/activity_lifecycle.png" alt="Ciclo di vita di un'activity" /></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Esercitazione 2</h1>
+        
+        <ul>
+        <li><p>Da Eclipse: New.. | Project | Android Project From Existing Code</p></li>
+        <li><p><code>cw-lunchlist-master/02-SimpleForm</code></p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Creazione di un'Activity</h1>
+        
+        <p><code>onCreate(Bundle)</code>
+        <textarea class='code' display='none' mode='java'>@Override&#x000A;public void onCreate(Bundle savedInstanceState) {&#x000A;	super.onCreate(savedInstanceState);&#x000A;	setContentView(R.layout.main);&#x000A;&#x000A;	Button save=(Button)findViewById(R.id.save);&#x000A;&#x000A;	save.setOnClickListener(onSave);&#x000A;}&#x000A;&#x000A;private View.OnClickListener onSave=new View.OnClickListener() {&#x000A;	public void onClick(View v) {&#x000A;		EditText name=(EditText)findViewById(R.id.name);&#x000A;		EditText address=(EditText)findViewById(R.id.addr);&#x000A;&#x000A;		r.setName(name.getText().toString());&#x000A;		r.setAddress(address.getText().toString());&#x000A;	}&#x000A;};</textarea>
+    </p>
+        
+        <p><code>res/layout/main.xml</code>
+        <textarea class='code' display='none' mode='xml'><?xml version="1.0" encoding="utf-8"?>&#x000A;<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"&#x000A;android:orientation="vertical"&#x000A;android:layout_width="match_parent"&#x000A;android:layout_height="match_parent">&#x000A;...&#x000A;<Button&#x000A;android:id="@+id/save"&#x000A;android:layout_width="match_parent"&#x000A;android:layout_height="wrap_content"&#x000A;android:text="@string/save_button" />&#x000A;</LinearLayout></textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Una view in Android</h1>
+        
+        <ul>
+        <li>viene creata da un <em>layout</em> che viene caricato e mostrato dall'Activity</li>
+        <li>ci sono diversi tipi di <em>layout</em>, ad es.: <code>LinearLayout</code>, <code>RelativeLayout</code>, <code>TableLayout</code>...</li>
+        <li>in genere un layout contiene elementi della User Interface</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Rinomina progetto</h1>
+        
+        <ul>
+        <li>in Eclipse selezionare il progetto <code>LunchList</code></li>
+        <li>sul menu contestuale, selezionare: Refactor | Rename</li>
+        <li>rinominare <code>LunchList_02</code> <p style="display:none">_</p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Esercitazione 3</h1>
+        
+        <ul>
+        <li><p>Da Eclipse: New.. | Project | Android Project From Existing Code</p></li>
+        <li><p><code>cw-lunchlist-master/03-FancierForm</code></p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Esempio di Layout</h1>
+        
+        <p><textarea class='code' display='none' mode='xml'><?xml version="1.0" encoding="utf-8"?>&#x000A;<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"&#x000A;android:layout_width="match_parent"&#x000A;android:layout_height="match_parent"&#x000A;>            &#x000A;	<TableLayout android:id="@+id/details"&#x000A;	android:layout_width="match_parent"&#x000A;	android:layout_height="wrap_content"&#x000A;	android:layout_alignParentBottom="true"&#x000A;	android:stretchColumns="1"&#x000A;	android:shrinkColumns="1"&#x000A;	>&#x000A;		<TableRow>&#x000A;			<TextView android:text="Name:" />&#x000A;			<EditText android:id="@+id/name" />&#x000A;		</TableRow>&#x000A;		<TableRow>&#x000A;			<TextView android:text="Address:" />&#x000A;			<EditText android:id="@+id/addr" />&#x000A;		</TableRow>&#x000A;		<TableRow>&#x000A;			<TextView android:text="Type:" />&#x000A;			<RadioGroup android:id="@+id/types">&#x000A;				<RadioButton android:id="@+id/take_out"&#x000A;				android:text="Take-Out"&#x000A;				android:checked="true"&#x000A;				/>&#x000A;				<RadioButton android:id="@+id/sit_down"&#x000A;				android:text="Sit-Down"&#x000A;				/>&#x000A;				<RadioButton android:id="@+id/delivery"&#x000A;				android:text="Delivery"&#x000A;				/>&#x000A;			</RadioGroup>&#x000A;		</TableRow>&#x000A;		<Button android:id="@+id/save"&#x000A;		android:layout_width="match_parent"&#x000A;		android:layout_height="wrap_content"&#x000A;		android:text="Save"&#x000A;		/>&#x000A;	</TableLayout>&#x000A;	<ListView android:id="@+id/restaurants"&#x000A;	android:layout_width="match_parent"&#x000A;	android:layout_height="wrap_content"&#x000A;	android:layout_alignParentTop="true"&#x000A;	android:layout_above="@id/details"&#x000A;	/>&#x000A;</RelativeLayout></textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <p><img src="images/layout_example.png" alt="Layout precedente mostrato dal dispositivo" /></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Caricamento XML</h1>
+        
+        <p>Quando viene compilata l'applicazione, ogni layout viene compilato in una View</p>
+        
+        <p>Si carica la risorsa di layout dal codice applicativo, nella  callback <code>Activity.onCreate()</code>
+        chiamando <code>setContentView()</code> passando il riferimento alla risorsa di layout nella forma
+        <code>R.layout.&lt;nome_layout&gt;</code></p>
+        
+        <p>Esempio:
+        <textarea class='code' display='none' mode='java'>public void onCreate(Bundle savedInstanceState) {&#x000A;    super.onCreate(savedInstanceState);&#x000A;    setContentView(R.layout.main_layout);&#x000A;}</textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Attributi</h1>
+        
+        <p>Ogni <code>View</code> e <code>ViewGroup</code> supporta il proprio insieme di attributi XML</p>
+        
+        <ul>
+        <li>Alcuni sono specifici ad un <em>View object</em> (esempio: <code>TextView</code> supporta l'attributo <code>textSize</code>)</li>
+        <li>Altri sono comuni a tutti (esempio: l'attributo <code>id</code>)</li>
+        <li>Altri ancora sono considerati <em>parametri di layout</em> (esempio: orientazione del layout)</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Attributo ID</h1>
+        
+        <p>Qualsiasi oggetto <code>View</code> puo' avere un ID associato ad esso per identificare univocamente l'oggetto</p>
+        
+        <p>Quando l'applicazione viene compilata, questo ID e' referenziato come un intero, ma tipicamente viene assegnato nel layout XML come una stringa.</p>
+        
+        <p>Ecco la sintassi:</p>
+        
+        <pre><code>android:id="@+id/my_button"
+        </code></pre>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Attributi ID</h1>
+        
+        <p>Il simbolo <code>@</code> indica che il parser XML dovrebbe espandere la stringa dopo lo slash ed identificarla come un ID intero.
+        Il simbolo <code>+</code> significa che si tratta di una nuova risorsa che deve essere creata e aggiunta al file di risorse <code>R.java</code></p>
+        
+        <p>Per le risorse che fanno riferimento ad elementi di Android non c'e' bisogno del simbolo <code>+</code> e possono essere referenziate con questa sintassi:</p>
+        
+        <pre><code>android:label="@string/app_name"
+        </code></pre>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Riferimenti alle View</h1>
+        
+        <p>Per creare view e ottenerne un riferimento dall'applicazione, un pattern seguito e':</p>
+        
+        <ol>
+        <li><p>Definire la view assegnando un unico ID
+        <textarea class='code' display='none' mode='xml'><Button android:id="@+id/my_button"&#x000A;        android:layout_width="wrap_content"&#x000A;        android:layout_height="wrap_content"&#x000A;        android:text="@string/my_button_text"/></textarea>
+    </p></li>
+        <li><p>Creare un'istanza dell'oggetto e ottenerne un riferimento (sull'<code>onCreate()</code> in genere)
+        <textarea class='code' display='none' mode='java'>Button myButton = (Button) findViewById(R.id.my_button);</textarea>
+    </p></li>
+        </ol>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Parametri di Layout</h1>
+        
+        <p>Gli attributi di layout XML che si chiamano <code>layout_&lt;nome_parametro&gt;</code> definiscono parametri per il layout della <code>View</code> relativa al <code>ViewGroup</code> nel quale risiede.</p>
+        
+        <p>Ogni <code>ViewGroup</code> implementa una <em>nested class</em> che estende <code>ViewGroup.LayoutParams</code>.</p>
+        
+        <p>Tale sottoclasse contiene tipi di proprieta' che definiscono dimensioni e posizione di ciascuna
+        view figlia cosi' come definito dalla <code>ViewGroup</code></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <p><img src="images/layout_params.png" alt="Layout Params" /></p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Layouts tipici</h1>
+        
+        <p>Ogni sottoclasse di <code>ViewGroup</code> fornisce una modalita' di visualizzazione delle viste in
+        essa contenute.</p>
+        
+        <p>Ecco alcuni esempi di <code>ViewGroup</code></p>
+        
+        <ul>
+        <li>LinearLayout: dispone i propri figli su di una singola riga, orizzontale o verticale</li>
+        <li>RelativeLayout: consente di specificare la posizione delle view figlie in relazione tra loro (A alla sx di B) o della view genitore</li>
+        <li>WebView: mostra pagine web</li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Rinomina progetto</h1>
+        
+        <ul>
+        <li>in Eclipse selezionare il progetto <code>LunchList</code></li>
+        <li>sul menu contestuale, selezionare: Refactor | Rename</li>
+        <li>rinominare <code>LunchList_03</code></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Esercitazione 4</h1>
+        
+        <ul>
+        <li><p>Da Eclipse: New.. | Project | Android Project From Existing Code</p></li>
+        <li><p><code>cw-lunchlist-master/04-ListView</code></p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Adapters</h1>
+        
+        <p>Un adapter fornisce un'interfaccia comune al data model sottostante ai
+        widget di selezione come un ListBox.</p>
+        
+        <p>Gli adapter di Android sono responsabili dell'elenco dei dati per un
+        widget di selezione oltre a convertire individuali elementi di dato in
+        view specifiche che vengono mostrate dentro il widget di selezione.</p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <p><textarea class='code' display='none' mode='java'>class RestaurantAdapter extends ArrayAdapter<Restaurant> {&#x000A;	RestaurantAdapter() {&#x000A;		super(LunchList.this, R.layout.row, model);&#x000A;	}&#x000A;&#x000A;	public View getView(int position, View convertView,&#x000A;			ViewGroup parent) {&#x000A;		View row=convertView;&#x000A;		RestaurantHolder holder=null;&#x000A;&#x000A;		if (row==null) {&#x000A;			LayoutInflater inflater=getLayoutInflater();&#x000A;&#x000A;			row=inflater.inflate(R.layout.row, parent, false);&#x000A;			holder=new RestaurantHolder(row);&#x000A;			row.setTag(holder);&#x000A;		}&#x000A;		else {&#x000A;			holder=(RestaurantHolder)row.getTag();&#x000A;		}&#x000A;&#x000A;		holder.populateFrom(model.get(position));&#x000A;&#x000A;		return(row);&#x000A;	}&#x000A;}</textarea>
+    </p>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Rinomina progetto</h1>
+        
+        <ul>
+        <li>in Eclipse selezionare il progetto <code>LunchList</code></li>
+        <li>sul menu contestuale, selezionare: Refactor | Rename</li>
+        <li>rinominare <code>LunchList_04</code> <p style="display:none">_</p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <section class='left slide'>
+      <div class='spacer top'></div>
+      <div class='content'>
+        <h1>Esercitazione 5</h1>
+        
+        <ul>
+        <li><p>Da Eclipse: New.. | Project | Android Project From Existing Code</p></li>
+        <li><p><code>cw-lunchlist-master/05-FancyList</code></p></li>
+        </ul>
+      </div>
+      <div class='spacer bottom'></div>
+    </section>
+    <!-- deck.js navigation extension -->
+    <a class='deck-prev-link' href='#' title='Previous'>&#8592;</a>
+    <a class='deck-next-link' href='#' title='Next'>&#8594;</a>
+    <!-- deck.js hash extension -->
+    <a class='deck-permalink' href='.' title='Permalink to this slide'>#</a>
+    <!-- deck.js status extension -->
+    <p class='deck-status'>
+      <span class='deck-status-current'></span>
+      /
+      <span class='deck-status-total'></span>
+    </p>
+    <!-- jQuery & deck.js -->
+    <script src="deck.js/support/jquery.1.6.4.min.js" type="text/javascript"></script>
+    <script src="deck.js/core/deck.core.js" type="text/javascript"></script>
+    <!-- deck.js extension JS files -->
+    <script src="deck.js/extensions/codemirror/codemirror.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/deck.codemirror.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/clike/clike.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/clojure/clojure.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/coffeescript/coffeescript.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/css/css.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/diff/diff.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/haskell/haskell.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/htmlmixed/htmlmixed.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/javascript/javascript.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/lua/lua.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/php/php.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/plsql/plsql.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/python/python.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/r/r.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/rst/rst.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/ruby/ruby.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/scheme/scheme.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/smalltalk/smalltalk.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/sparql/sparql.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/stex/stex.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/velocity/velocity.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/xml/xml.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/xmlpure/xmlpure.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/codemirror/mode/yaml/yaml.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/goto/deck.goto.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/hash/deck.hash.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/menu/deck.menu.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/navigation/deck.navigation.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/scale/deck.scale.js" type="text/javascript"></script>
+    <script src="deck.js/extensions/status/deck.status.js" type="text/javascript"></script>
+    <!-- your custom JS here, including call to initialize deck.js-codemirror -->
+    <script src="js/corso_android.js" type="text/javascript"></script>
+    <!-- Initialize the deck. -->
+    <script type='text/javascript'>
+      $(function() { $.deck('.slide'); });
+    </script>
+  </body>
+</html>
