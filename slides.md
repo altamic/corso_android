@@ -3,7 +3,7 @@
 !SLIDE
 
 # Android Workshop
-## Torino, Gennaio 2013
+## Torino, Febbraio 2013
 ### Michelangelo Altamore
 
 !NOTE
